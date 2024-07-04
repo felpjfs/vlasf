@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="ahahah.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>VLASF</title>
+    <script src="script.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Alice' rel='stylesheet'>
+    <script src="script.js"></script>
+    <style>
+        body {
+            font-family: 'Alice';
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Primeiro Cadastro</h1>
+    </header>
+
+    <div class="container">
+        <div class="forms">
+            <form action></form>
+            <div class="dados">
+                <h2>Dados Cadastrais</h2>
+                <div class="campo1">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" style="width: 60%;" id="nome" value="">
+                </div>
+                <div class="campo1">
+                    <label for="">Email</label>
+                    <input type="text" id="email">
+                </div>
+                <div class="campo1">
+                    <label for="">Data de Nascimento</label>
+                    <input type="tetx" style="align-self: flex-end;width: 30%;" id="data">
+                </div>
+                <div class="campo1">
+                    <label for="">CPF</label>
+                    <input type="text" id="cpf">
+                </div>
+                <div class="campo1">
+                    <label for="">Contato</label>
+                    <input type="text" id="contato">
+                </div>
+                <div class="campo1">
+                    <label for="">CEP</label>
+                    <input type="text" id="cep">
+                </div>
+            </div>
+            <div class="senha">
+                <h2>Senha</h2>
+                <div class="campo2">
+                    <label for="">Senha</label>
+                    <input type="text" id="senha">
+                </div>
+                <div class="campo2">
+                    <label for="">Confirmar Senha</label>
+                    <input type="text" id="confsenha">
+                </div>
+                <button class="btn" id="submit">Salvar</button>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyByxDmcUoq5Qzi3ZWE_tDKeUS4S57c7ia0",
+            authDomain: "dhdhd-dfcff.firebaseapp.com",
+            databaseURL: "https://dhdhd-dfcff-default-rtdb.firebaseio.com",
+            projectId: "dhdhd-dfcff",
+            storageBucket: "dhdhd-dfcff.appspot.com",
+            messagingSenderId: "29193126584",
+            appId: "1:29193126584:web:647b745e596563b706ea4d"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import { getDatabase, set, get, ref, child } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+        const bd = getDatabase();
+
+        var cpf = document.getElementById("cpf");
+        var nome = document.getElementById("nome");
+        var email = document.getElementById("email");
+        var data = document.getElementById("data");
+        var cep = document.getElementById("cep");
+        var contato = document.getElementById("contato");
+        var senha = document.getElementById("senha");
+
+        var btn = document.getElementById("submit");
+
+        
+        const ids = ["nome", "cpf", "cep", "contato", "senha", "confsenha", "data", "email"]
+        var ok;
+        
+        function validar() {
+            var dados = 0;
+            for (var i = 0; i < 8; i++) {
+                if (document.getElementById(ids[i]).value == "") {
+                    dados++;
+                } 
+            }
+
+            if(dados!=0){
+                    alert("preencha todos os campos");
+                    ok=false;
+                }
+                else{
+                    set(ref(bd, 'usuario/' + cpf.value), {
+                Nome: nome.value,
+                CPF: cpf.value,
+                CEP: cep.value,
+                Contato: contato.value,
+                Aniversario: data.value,
+                Email: email.value,
+                Senha: senha.value
+            })
+                    for (var i = 0; i < 8; i++) {
+                document.getElementById(ids[i]).value = "";
+            }
+
+                }
+        
+        }
+        btn.addEventListener('click', validar);
+
+    </script>
+
+
+</body>
+
+</html>
